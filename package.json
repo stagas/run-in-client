@@ -11,9 +11,12 @@
   },
   "keywords": [
     "typescript",
-    "scaffold",
-    "skeleton",
-    "template"
+    "puppeteer",
+    "esbuild",
+    "server",
+    "function",
+    "testing",
+    "test"
   ],
   "module": "dist/esm/index.js",
   "main": "dist/cjs/index.js",
