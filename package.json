@@ -3,7 +3,7 @@
   "author": "stagas",
   "short": "stagas/run-in-client",
   "description": "runs a single function in the client using puppeteer and esbuild",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "repository": {
     "type": "git",
