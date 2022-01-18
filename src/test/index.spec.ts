@@ -29,6 +29,17 @@ describe('runInClient', () => {
     expect(result).toEqual('foo')
   })
 
+  it('server ignores query parameters', async () => {
+    const result = await runInClient(
+      {
+        root: path.resolve(path.join(__dirname, 'fixture')),
+        include: `import { query } from './query.ts?some-query'; window.query = query`,
+      },
+      () => (window as any).query
+    )
+    expect(result).toEqual('some-query')
+  })
+
   it('errors', async () => {
     await expect(
       runInClient({}, () => {

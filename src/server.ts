@@ -27,14 +27,16 @@ export const createServer = async (setup: ServerSetup) => {
     try {
       req.url = req.url!
 
-      if (req.url in responses) {
+      const [url] = req.url.split('?')
+
+      if (url in responses) {
         const content = responses[req.url]
         res.setHeader('Content-Type', content.type)
         res.end(content.content)
         return
       }
 
-      let filename = path.resolve(path.join(setup.root, req.url))
+      let filename = path.resolve(path.join(setup.root, url))
       let contents: string
 
       if (filename.endsWith('.ts')) {
