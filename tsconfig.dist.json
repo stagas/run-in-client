@@ -3,6 +3,7 @@
   "exclude": [
     "benchmark",
     "example",
+    "**/test/**",
     "**/*.spec.ts",
     "**/*.spec.tsx"
   ],
