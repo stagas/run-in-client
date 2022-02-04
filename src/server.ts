@@ -17,6 +17,7 @@ interface ContentResponse {
 export interface ServerSetup {
   errorHook: (error: Error) => void
   root: string
+  inject?: string
   buildOptions?: Parameters<typeof buildSync>[0]
 }
 
@@ -59,7 +60,7 @@ export const createServer = async (setup: ServerSetup) => {
       }
       const contentType = mime.contentType(path.basename(filename))
       res.setHeader('Content-Type', contentType || 'application/octet-stream')
-      res.end(contents)
+      res.end((setup.inject ?? '') + contents)
     } catch (error) {
       // console.log(error)
       res.statusCode = 400

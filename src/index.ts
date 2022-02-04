@@ -45,7 +45,7 @@ export const runInClient = async (setup: ClientSetup, fn: () => unknown) => {
   let errorHook!: () => void
   const errorPromise = new Promise<void>((_, reject) => (errorHook = reject))
 
-  const server = await createServer({ root: setup.root ?? process.cwd(), errorHook })
+  const server = await createServer({ ...setup, root: setup.root ?? process.cwd(), errorHook })
 
   setup.launchOptions ??= {}
   setup.launchOptions.args ??= []
