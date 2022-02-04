@@ -40,7 +40,7 @@ export const createServer = async (setup: ServerSetup) => {
       let filename = path.resolve(path.join(setup.root, url))
       let contents: string
 
-      if (filename.endsWith('.ts')) {
+      if (filename.endsWith('.ts') || filename.endsWith('.tsx') || filename.endsWith('.jsx')) {
         const result = buildSync({
           entryPoints: [filename],
           format: 'esm',
@@ -54,7 +54,7 @@ export const createServer = async (setup: ServerSetup) => {
         const [file] = result.outputFiles || []
         if (!file) throw new TypeError('Build failed, no output files')
         contents = Buffer.from(file.contents).toString('utf8')
-        filename = filename.replace('.ts', '.js')
+        filename = filename.replace('.ts', '.js').replace('.tsx', '.js').replace('.jsx', '.js')
       } else {
         contents = await fs.readFile(filename, 'utf8')
       }
