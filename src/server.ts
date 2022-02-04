@@ -1,11 +1,11 @@
 import https from 'https'
+import type { AddressInfo } from 'net'
+import path from 'path'
+import { buildSync } from 'esbuild'
+import getPort from 'find-free-ports'
 import fs from 'fs/promises'
 import makeCert from 'make-cert'
-import path from 'path'
 import mime from 'mime-types'
-import getPort from 'find-free-ports'
-import { buildSync } from 'esbuild'
-import type { AddressInfo } from 'net'
 
 const keys = makeCert('localhost')
 

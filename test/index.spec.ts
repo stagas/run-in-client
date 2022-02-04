@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { runInClient } from '../'
 import path from 'path'
+import { runInClient } from '../src'
 
 describe('runInClient', () => {
   it('works', async () => {

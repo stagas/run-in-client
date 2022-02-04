@@ -1,7 +1,6 @@
 import puppeteer from 'puppeteer'
 import pretty from 'puppeteer-pretty-console'
 import { createServer } from './server'
-
 import type { ServerSetup } from './server'
 
 export interface ClientSetup extends Partial<ServerSetup> {
@@ -49,7 +48,9 @@ export const runInClient = async (setup: ClientSetup, fn: () => unknown) => {
 
   setup.launchOptions ??= {}
   setup.launchOptions.args ??= []
-  setup.launchOptions.args = [...new Set([...setup.launchOptions.args, '--ignore-certificate-errors'])]
+  setup.launchOptions.args = [
+    ...new Set([...setup.launchOptions.args, '--ignore-certificate-errors']),
+  ]
   const browser = await puppeteer.launch(setup.launchOptions)
 
   const close = async () => {
@@ -68,8 +69,14 @@ export const runInClient = async (setup: ClientSetup, fn: () => unknown) => {
       const page = await browser.newPage()
       pretty(page)
       await page.exposeFunction('ready', () => resolveReady())
-      server.responses['/'] = { type: 'text/html', content: '<script type="module" src="client.js"></script>' }
-      server.responses['/client.js'] = { type: 'application/javascript', content: (setup.include ?? '') + ';ready()' }
+      server.responses['/'] = {
+        type: 'text/html',
+        content: '<script type="module" src="client.js"></script>',
+      }
+      server.responses['/client.js'] = {
+        type: 'application/javascript',
+        content: (setup.include ?? '') + ';ready()',
+      }
       await page.goto(server.url + '/', { timeout: 1000 })
       await readyPromise
       const result = await page.evaluate(fn)
