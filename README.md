@@ -32,7 +32,7 @@ $ npm i run-in-client
 
 ### runInClient
 
-[src/index.ts:44-82](https://github.com/stagas/run-in-client/blob/68285420b263e76ee26f07e626e869b67c1b5461/src/index.ts#L44-L82 "Source code on GitHub")
+[src/index.ts:43-92](https://github.com/stagas/run-in-client/blob/73a6c003203299a30c1469173e1a00bcd43a986d/src/index.ts#L43-L92 "Source code on GitHub")
 
 Creates a static server with esbuild transforms, creates a puppeteer instance,
 executes a single function, returns its result and tears down.
