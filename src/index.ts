@@ -53,6 +53,9 @@ export const runInClient = async (setup: ClientSetup, fn: () => unknown) => {
   const browser = await puppeteer.launch(setup.launchOptions)
 
   const close = async () => {
+    // wait for console to flush
+    await new Promise(resolve => setTimeout(resolve, 20))
+
     await browser.close()
     await server.close()
   }
